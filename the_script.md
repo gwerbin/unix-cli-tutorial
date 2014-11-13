@@ -1,10 +1,6 @@
-----
-title: "How to use the command line"
-author: "Greg Werbin and QASR"
-output:
-    html_document:
-        fig_caption: true
-----
+# How to use the command line
+### November 18, 2014
+### by Greg Werbin, on behalf of QASR
 
 ## Intro
 
