@@ -71,9 +71,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </tr>
 </tbody>
 </table>
-<div id="intro" class="section level3">
-<h3>Intro</h3>
-<p>Today we’re going to learn how to use the command line.</p>
+<div id="intro" class="section level2">
+<h2>Intro</h2>
+<p>Today we’re going to learn how to use the command line. The command line is a great tool for automating tasks, processing text streams, and just getting around your computer efficiently. I’m going to throw a lot of stuff at you today, but it really is worth taking the time to learn. It’s an old school skill, but it’s coming back in a big way. If nothing else, you will be more efficient and therefore productive once you’re comfortable with it. But it’s also becoming increasingly important as a component of basic computer literacy for anyone involved in statistics and other data-related work, because those fields are becoming increasingly dependent on computing and programming.</p>
 <p>Hopefully you followed the instructions we sent out with the RSVP. If you’re on a Mac there isn’t much you had to do, but if you’re on a Windows machine you will need to have Cygwin installed and ready to go in order to be able to do most what I’m going to show today.</p>
 <p>Now, Windows does have its own command line, with its own commands and syntax, but the de facto standard is the Unix-style command line, and especially the Bash shell. I’ll explain what I mean by all that in a second.</p>
 <p>Let’s start by opening Terminal, or Cygwin. You should see something similar to what I have, although it probably won’t be exactly the same. Before we start typing anything, some context:</p>
@@ -83,16 +83,130 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p>So in an abstract sense the one on your screen is emulating the behavior of that device. The terminal on a Mac is just called Terminal. In Cygwin, the terminal is called MinTTY. On a Mac, the operating system is the Mac OS, which is a descendant of BSD, which is a variant of the Unix operating system. Linux is also based on Unix. That’s why your Mac has this Unix-like environment inside it that’s ready to go; because there actually <em>is</em> Unix inside it. On a Windows, Cygwin programs are actually speaking to the Windows operating system, so even though they do a good job of looking and acting like Unix, it’s not a perfect imitation.</p>
 <p>The default shell on Macs, in Cygwin, and on a lot of Linux machines is called Bash. The shell is just a program that turns commands into actions, but it is also an interpreted scripting language with its own syntax. Different shells have different syntax, which is why using the built-in Windows shell, called CMD.EXE, can be a different experience from using Bash even when the programs are the same. That’s not to mention that different operating systems have different programs available. On Unix systems, the other shell you might run into is the Z Shell, or “zsh,” which has some additional nice features, but you’ll rarely be forced to use it unless you want to.</p>
 </div>
-<div id="getting-started" class="section level3">
-<h3>Getting started</h3>
+<div id="getting-around" class="section level2">
+<h2>Getting around</h2>
 <p>So here we’re being prompted for a command, but right now we have no idea what commands Bash will understand, let alone what we might even want to command it to do.</p>
 <p>When using a shell, you are always working “inside” a folder on your computer, called the “working directory.” This is like always having a Finder or Explorer window open in a particular folder, and, loosely, all of the commands you enter are assumed to act on that folder unless specified otherwise. I’ll try to show you what we’re doing in the shell with my Finder window, to try and tie it back to what we’re used to doing.</p>
 <p>In Finder/Explorer, we can usually see what folder we’re in by looking at the title bar. In the shell, we’re going to use a command to do this:</p>
 <pre><code>pwd</code></pre>
 <p>which stands for “<code>p</code>rint <code>w</code>working <code>d</code>irectory.” Try it now; all it does is print the working directory to the terminal output, called the “standard output” or stdout. By default, the shell opens in what’s known as the home directory, which on a Mac is /Users/your-user-name. The “/” directory is the “base” directory. In Cygwin, the file structure is going to be a little bit different, because it sets up a “mini Unix” file structure inside a folder somewhere in your computer and “pretends” there’s nothing outside it, but in Windows the “/” is equivalent to “C:”.</p>
-<p>The default Mac prompt is made of a few components: the “host name,” which is usually the name of your computer unless you’re connected to a big network like the Columbia network, the working directory, your username, and a dollar sign to indicate where to type in commands. You’ll see that the working directory here is <code>~</code> and not <code>/Users/hotdog2</code>. The tilde is Unix shorthand for the home directory, whatever it might be. To see this, type</p>
+<p>The default Mac prompt is made of a few components: the “host name,” which is usually the name of your computer unless you’re connected to a big network like the Columbia network, the working directory, your username, and a dollar sign to indicate where to type in commands. You’ll see that the working directory here is <code>~</code> and not <code>/Users/hotdog2/</code>. The tilde is Unix shorthand for the home directory, whatever it might be. To see this, type</p>
 <pre><code>echo ~</code></pre>
-<p>Before it runs any command here, the shell first sees that there’s a <code>~</code> and “expands” it to <code>/Users/hotdog2</code>, and <em>then</em> runs the command. That might not mean much right now, but it’s a special kind of behavior and it will be important to understand once you start programming the shell, which you undoubtedly will at some point. The <code>echo</code> command just prints its argument to stdout, so all we did here was tell Bash to run the command <code>echo</code> on its “argument,” which is programming-language jargon for “input to a function.” In Bash, functions and arguments are separated by a space, and arguments are also separated from each other by a space. This makes it really easy to write commands without lots of punctuation, but it can also cause problems with, say, spaces in file names. You are allowed to have spaces in file names but you need to handle them the right way. We’ll get to that a bit later.</p>
+<p>Before it runs any command here, the shell first sees that there’s a <code>~</code> and “expands” it to <code>/Users/hotdog2/</code>, and <em>then</em> runs the command. That might not mean much right now, but it’s a special kind of behavior and it will be important to understand once you start programming the shell, which you undoubtedly will at some point. The <code>echo</code> command just prints its argument to stdout, so all we did here was tell Bash to run the command <code>echo</code> on its “argument,” which is programming-language jargon for “input to a function.” In Bash, functions and arguments are separated by a space, and arguments are also separated from each other by a space. This makes it really easy to write commands without lots of punctuation, but it can also cause problems with, say, spaces in file names. You are allowed to have spaces in file names but you need to handle them the right way. We’ll get to that a bit later. &lt; talk about Cygwin: <a href="http://stackoverflow.com/q/11089390/2954547" class="uri">http://stackoverflow.com/q/11089390/2954547</a> &gt;.</p>
+<p>So you might have noticed that you feel a little bit “blind” working in the shell versus working in the GUI. For instance, in Finder I can not only see all of the contents of my working directory but I also have a lot of other information available at once. In the shell, you have to ask for that information; it doesn’t tell you anything you don’t ask it for. We can see the contents of the working directory with the command</p>
+<pre><code>ls</code></pre>
+<p>which stands for “<code>l</code>i<code>s</code>t files.” On my screen, folders are purple and regular files are white, but that’s because I set those colors in a special file that I won’t have time to discuss today; by default there isn’t any color coding. On a Mac, like on my computer, there is going to be a lot of junk in here. &lt; talk about Cygwin &gt;.</p>
+<p>What’s cool about <code>ls</code> is that it also takes arguments. That is, I can actually tell <code>ls</code> what folder to display without having to navigate to that folder (which I haven’t told you how to do yet, anyway). Let’s say we wanted to look at the contents of our system root directory, indicated by a plain <code>/</code> (this works differently from <code>~</code>; more on it later). Then we can type</p>
+<pre><code>ls /</code></pre>
+<p>which passes the argument <code>/</code> to the <code>ls</code> command. You can do this with any directory on your machine! There are also the “special” directories <code>.</code> and <code>..</code>. The first refers to the current directory, so <code>ls .</code> is equivalent to <code>ls</code> without any arguments, and the second refers to whatever directory is <em>above</em> the current working directory. When I’m in my home directory, <code>..</code> refers to <code>/Users</code> so <code>ls ..</code> lists the contents thereof. Note that <code>..</code> works differently from <code>~</code>: it’s a special file, unlike <code>~</code> which is a special <em>word</em> understood by Bash, so Bash doesn’t expand <code>.</code>. You can try <code>echo ..</code> to see what I mean.</p>
+<p>Now what if we want to change directories? Let’s say we wanted to move up one directory, i.e. move to <code>..</code>. Then we can type</p>
+<pre><code>cd ..</code></pre>
+<p>which stands for <code>c</code>hange <code>d</code>irectory, in this case to <code>..</code>. Now we can <code>pwd</code> and see that, in fact, I’m in <code>/Users/</code>, and we can use <code>ls</code> to see that, in fact, <code>hotdog2/</code> is an item the current directory. Or we can look at the contents of <code>hotdog2</code> with <code>ls hotdog2</code>. Then we can change directory back to our home directory with</p>
+<pre><code>cd hotdog2</code></pre>
+<p>or</p>
+<pre><code>cd hotdog2/</code></pre>
+<p>where the trailing slash is completely optional, but sometimes using the slashes can help you keep track of what you’re doing.</p>
+<p>We can also use <code>~</code> here. For instance, you can always <code>cd ~</code> to change back to your home directory.</p>
+</div>
+<div id="keyboard-interrupt-the-eject-switch" class="section level2">
+<h2>Keyboard interrupt: the “eject” switch</h2>
+<p>So just to see what happens, try typing the wrong thing:</p>
+<pre><code>cd hotdog
+ls hotdog</code></pre>
+<p>which will give you an error. Or worse, you can type</p>
+<pre><code>cd hotdog`</code></pre>
+<p>which won’t even give you an error. There are also plenty of “dangerous” things you can type, that I won’t show you here, that can permanently damage your computer. To break out of a bad input, press <code>ctrl+c</code>. This “keyboard interrupt” will also stop a running program, which can be a life saver.</p>
+</div>
+<div id="options" class="section level2">
+<h2>Options</h2>
+<p>Most Unix programs have multiple options that can be used by passing <code>switches</code> or <code>flags</code> as arguments. For instance,</p>
+<pre><code>ls -l</code></pre>
+<p>shows files in “long” format, which includes more information.</p>
+<pre><code>ls -a</code></pre>
+<p>shows “all” files, including <code>.</code> and <code>..</code> as well as any other hidden files. You can also typically chain these together, so <code>ls -la</code> is equivalent to <code>ls -l -a</code>. “Short” options are prefixed by a single <code>-</code>, while “long” options, like a lot of options in Git, are prefixed by <code>--</code>.</p>
+</div>
+<div id="getting-help" class="section level2">
+<h2>Getting help</h2>
+<p>And where are all these options documented? There is a Unix program called <code>man</code>, short for <code>man</code>ual, that allows us to, unsurprisingly, read the manual. Try</p>
+<pre><code>man ls</code></pre>
+<p><code>man</code> actually doesn’t render the text output here; that’s handled by a program called a “pager,” which on a Mac and most other systems defaults to a program called <code>less</code>. Getting around <code>less</code> can be a bit confusing at first. For instance, you can always exit with the <code>Ctrl+C</code>, but that’s like using the Windows task manager to exit MS Word. <code>less</code> has its own set of commands that are inspired by the</p>
+<p>As an aside: One of the obstacles to learning to work on the command line is that you have to remember not only a mini programming language just to get around and do things, but most programs on the command line have their <em>own</em> set of commands to remember. There’s a big learning curve here, but it comes naturally with some time and practice. One thing I’ll encourage you to do, especially if you’re going to be at Nick’s workshop next week, is to make excuses to do small tasks on the command line. Knowing how to get around a <code>man</code> page is a particularly good way to learn how to do things faster, because it’s easy to get help.</p>
+<p>The first (and in a way, only) <code>less</code> command in you need to know is <code>h</code>, which unsurprisingly brings up the <code>h</code>elp page. Here you can see the other basic commands. Note that <code>^</code> means the <code>Ctrl</code> button. You can typically scroll around with the arrow keys, although you can also use the commands shown. The other all-important command is <code>q</code>, which quits the program (properly). Also vital is the command <code>/</code>, which searches forward, and <code>?</code> which searches backward. <code>n</code> repeats the previous search. <code>u</code> scrolls up an entire page, and <code>d</code> scrolls down a page.</p>
+<p>One last note about moving around: Bash has several keyboard shortcuts other than <code>ctrl+c</code>. Other handy features are <code>ctrl+a</code>, which deletes everything from the cursor position to the beginning of the line, <code>ctrl+a</code> which jumps to the beginning of the line, <code>ctrl+e</code> which jumps to the end, and <code>ctrl+k</code> which deletes everything from your cursor to the end of the line. To see these, try</p>
+<pre><code>man bash
+/commands for moving</code></pre>
+<p>to jump to the appropriate heading.</p>
+<p>There are two different styles of keyboard commands being used here, originally created by two popular command-line text editors, Emacs and Vi. Bash uses Emacs-style commands, and <code>less</code> uses Vi-style commands.</p>
+</div>
+<div id="managing-files" class="section level2">
+<h2>Managing files</h2>
+<p>Quick note about file names: spaces are allowed in file names on Mac OS and Windows, but as I mentioned before Bash uses spaces to delineate commands and arguments. This can be solved by quoting file names, such as <code>cd &quot;class/data viz&quot;</code> or <code>cd 'class/data viz'</code>. There is actually a difference between <code>&quot;</code> and <code>'</code>, although it’s not that important right now. You should, however, look it up online and make sure you understand it. Another way to solve the problem (although it’s ugly) is with “escaping” the offending character by preceding it with a backlash. The backslash tells Bash to ignore the next character and treat it like regular text. You could do <code>cd class/data\ viz</code> but that’s hideous. Escaping also allows me to type things like <code>echo \;</code>, since normally Bash uses <code>;</code> to indicate the end of a command without a line break.</p>
+<p>So let’s actually do something. Type <code>cd ~</code> just to make sure we’re in our home directory. Then type:</p>
+<pre><code>mkdir shell-tutorial</code></pre>
+<p>to <code>m</code>a<code>k</code>e a <code>dir</code>ectory called “shell-tutorial.” You can call it something different, but keep in mind what I said about spaces quoting. You’re also allowed to use periods, digits, and underscores to your heart’s content. Although you should know that starting a file name with a period signals to Bash (and also Finder) that the file is hidden, and it won’t come up in Finder (unless you turn on the right setting) or <code>ls</code> unless you use <code>ls -a</code>. A lot of configuration files are stored in your home directory this way, which is why people often call them “dotfiles.”</p>
+<p><code>ls</code> to see that you did indeed make a new folder, and <code>ls shell-tutorial</code> to see that it’s empty. Now let’s put a file in there. Write</p>
+<pre><code>touch shell-tutorial/stuff1</code></pre>
+<p>to create a new file, “stuff1” in the directory “shell-tutorial.” and <code>ls shell-tutorial</code> to see that it in fact contains a file called “file1.” Now, <code>cd shell-tutorial</code> to enter it. Confirm where you are with <code>pwd</code>, and confirm with <code>ls</code> that it contains <code>stuff1</code>.</p>
+<p>Let’s create two other directories:</p>
+<pre><code>mkdir my-files my-backups</code></pre>
+<p>and <code>ls</code> to see that we did in fact make them.</p>
+<p>Let’s say we wanted to move “stuff1” into “my-files”. We use</p>
+<pre><code>mv stuff1 my-files/stuff1</code></pre>
+<p>to <code>m</code>o<code>v</code>e the file from the location in the first argument to the location in the second argument. This is actually what we use to rename files as well. Rename “file1” to “file1.txt” with</p>
+<pre><code>mv my-files/file1 my-files/stuff1.txt</code></pre>
+<p>Note that file extensions, including on Windows systems, are completely optional. They are just a way for the user and the operating system to know what’s inside a file. But at the end of the day, <em>all files can be treated like text files</em>. I can open a PDF or Word file in a plain text editor like Notepad or Textedit, but I will get either a bunch of 1’s and 0’s or just plain garbage text. Those applications can’t read the data inside, but it’s all stored the same way.</p>
+<p>Knowing this, let’s give “stuff1.txt” a more descriptive name. Since typing paths is a pain, <code>cd my-files</code> first. Then</p>
+<pre><code>mv stuff1.txt regression_model_diagnostics.log</code></pre>
+<p>and <code>ls</code> to confirm what happened. Typing that long file name is going to be really obnoxious. Most terminals are equipped with “tab completion” that allows me to start typing <code>reg</code> and press <code>tab</code> to have it automatically fill in the full file name. This can save you a LOT of typing.</p>
+<p>Now suppose we wanted to make a backup of our log file and put it in the other folder we made. Use</p>
+<pre><code>cp regression_model_diagnostics.log ../my-backups/regression_model_diagnostics.log</code></pre>
+<p>to <code>c</code>o<code>p</code>y the file named in the first argument to the location named in the second. <code>ls ../my-backups</code> to see what we did.</p>
+<p>You might have noticed by now that file paths are relative. This includes the special directory <code>..</code>, which lets me do things like <code>ls ../my-backups</code>. Absolute paths start with <code>/</code>, which is why we say that <code>/</code> “is” the root directory. The one exception is for directories in the search path, which tells Bash where to look for executable files. Type <code>echo $PATH</code> to see your search path; it’s a list of directories separated by a colon.</p>
+<p>Now that we’ve made our backup, we can delete the original file:</p>
+<pre><code>rm regression_model_diagnostics.log</code></pre>
+<p>to <code>r</code>e<code>m</code>ove it.</p>
+<p>Now <code>cd ~/shell-tutorial/</code> to return to where we started. Remember <code>cd ..</code> would have done the same thing.</p>
+<p>Let’s remove an entire directory:</p>
+<pre><code>rmdir my-files</code></pre>
+<p>Note that this is equivalent to (but sometimes safer than) the <code>rm -d</code>.</p>
+<div id="text-and-viewing-files" class="section level3">
+<h3>Text and viewing files</h3>
+<p>There are a few quick text handling tools we’re going to run through but not explore in depth. First is the command <code>head</code>, which prints the first few lines (the “head”) of a file to stdout. There’s also <code>cat</code>, which prints entire files straight through. The name comes from con<code>cat</code>enate because it accepts multiple input files and prints them all end to end, i.e. conc<code>cat</code>enating them.</p>
+<p>The <code>|</code> tool allows you to “pipe” the text output of one command to another. So you can write:</p>
+<pre><code>ls /bin | head -n2</code></pre>
+<p>to print only the first two lines of output from <code>ls</code>. Note that <code>ls</code> “knows” what is reading its output. If it’s stdout, it will separate files with tabs. If it’s anything else, like a pipe, it will write one file to each line: <code>ls /bin | echo</code>.</p>
+<p>The <code>&gt;</code> is a “redirect” in that it “redirects” the output of a command to a file. We can type <code>touch hello_world</code> and then <code>echo hello world &gt; hello_world</code>. Then <code>cat hello_world</code> to see what we did. Then we can <code>echo goodbye world &gt; hello_world</code> to overwrite the file with “goodbye world” and then <code>cat hello_world</code> to see the change.</p>
+<p>You can also append, rather than redirect with <code>&gt;&gt;</code>. Try <code>echo just kidding &gt;&gt; hello_world</code> and <code>cat hello_world</code> to see what happened.</p>
+<p>And just to show you what quoting can do, try:</p>
+<pre><code>echo &quot;hello world&quot; &gt;&gt; hello_world
+echo \&quot;hello world\&quot; &gt;&gt; hello_world
+echo 'hello world' &gt;&gt; hello_world
+echo '&quot;hello world&quot;' &gt;&gt; hello_world
+echo '\&quot;hello world\&quot;' &gt;&gt; hello_world
+cat hello_world</code></pre>
+<p>You can also, of course, edit files with a regular text editor. You can do it in TextEdit or Notepad, or a more powerful editor like Sublime Text (highly recommended!!), or you can do it right on the command line with Emacs, Vim (“Vi iMproved”), or Nano. Nano is the simplest to use and I recommend it for beginners. Emacs and Vim are both extremely powerful but also have very steep learning curves. I’m not good with either of them, although I’m slowly learning to like Vim. Sublime Text and Notepad++ (which I haven’t used much) strike a nice balance between horrible plain text editors and the full-powered command line editors.</p>
+</div>
+<div id="package-managers" class="section level3">
+<h3>Package managers</h3>
+<p>One last thing: Linux pioneered a brilliant “package manager” system. For instance, on Ubutnu and Debian, I can type, say, <code>apt-get R</code> to automatically download, build, and install R. A few third-party package mangers exist for Macs, but I’m only going to recommend one: Homebrew. Google it to learn more. It’s open source, it’s written in Ruby and based on Git, and it’s fairly self-contained, in that it doesn’t spew garbage all over your system and typically doesn’t break other programs. It can be a bit difficult to uninstall (there is no official uninstall tool and the one uninstall script people link to is horrible and dangerous).</p>
+<p>On Cygwin, you don’t have a command line package manager but it does have a package manager. Run the “setup.exe” file that you used to install Cygwin to access it. Cygwin comes with a very limited set of tools by default, but it has a good selection of available packages.</p>
+</div>
+<div id="one-last-thing" class="section level3">
+<h3>One last thing:</h3>
+<p>In your home directory, there might be a file called <code>.bash_profile</code>. Type <code>ls -a ~</code> to see if it’s there. If not, you can make one with <code>touch ~/.bash_profile</code>. This dotfile is run every time you log in to a Bash session, and it’s where you can set options.</p>
+<p>For instance, let’s say you made a folder <code>~/bin</code> where you place all of your handy Bash scripts. You can run these scripts with <code>~/bin/my_script input_1 input_2</code>, or you can</p>
+<pre><code>echo 'export PATH=&quot;~/bin:$PATH&quot;' &gt;&gt; ~/.bash_profile</code></pre>
+<p>to add <code>~/bin</code> to the search path. So then I could just type <code>my_script</code> from any folder and Bash will know to look there, and look there first (because it’s first in the list), for an executable file called <code>my_script</code>. This is in fact how executable like <code>cp</code> are stored: <code>ls /bin</code>, and <code>echo $PATH</code> to note that <code>/bin</code> should be in there somewhere.</p>
+<p>The quoting here is defensive, just in case someone (foolishly) decided to put a directory with a space into <code>PATH</code>. Note that the <code>$</code> tells Bash to expand the variable <code>PATH</code>. Variables are expanded inside double quotes <code>&quot;&quot;</code> but not inside single quotes <code>''</code>:</p>
+<pre><code>echo $PATH
+echo &quot;$PATH&quot;
+echo '$PATH'</code></pre>
+</div>
+<div id="thats-it" class="section level3">
+<h3>That’s it!</h3>
+<p>Thank you! There are lots of resources online for getting help in Bash. Manpages, Google, and the various Stack Exchange sites (Unix &amp; Linux most of all, but also SuperUser, Ubuntu, occasionally even Serverfault, and of course the venerable StackOverflow) are great resources for learning more. These notes will also be archived on the QASR website.</p>
+<p>And last but not least, Nick Ursa of the CS department and the Columbia Data Science Society is teaching a tutorial on using the command line for data processing at the same time next week: Tuesday November 25 at 6 PM. See you there!</p>
+</div>
 </div>
 
 
