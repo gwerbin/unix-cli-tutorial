@@ -265,7 +265,7 @@ echo 'export PATH="~/bin:$PATH"' >> ~/.bash_profile
 
 to add `~/bin` to the search path. So then I could just type `my_script` from any folder and Bash will know to look there, and look there first (because it's first in the list), for an executable file called `my_script`. This is in fact how executable like `cp` are stored: `ls /bin`, and `echo $PATH` to note that `/bin` should be in there somewhere. 
 
-The quoting here is defensive, just in case someone (foolishly) decided to put a directory with a space into `PATH`. Note that the `$` tells Bash to expand the variable `PATH`. Variables are expanded inside double quotes `""` but not inside single quotes `''`:
+The quoting here is defensive, just in case someone (foolishly) decided to put a directory with a space into `PATH`. Note that the `$` tells Bash to expand the variable `PATH`. The special behavior of `$` is preserved inside double quotes `""` but not inside single quotes `''`:
 
 ```
 echo $PATH
