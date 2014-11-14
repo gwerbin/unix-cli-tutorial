@@ -18,7 +18,7 @@ The program we have open is called a "terminal" which is short for a "terminal e
 
 ![A terminal. Source: http://commons.wikimedia.org/wiki/File:Televideo925Terminal.jpg](http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Televideo925Terminal.jpg/579px-Televideo925Terminal.jpg)
 
-So in an abstract sense the one on your screen is emulating the behavior of that device. The terminal on a Mac is just called Terminal. In Cygwin, the terminal is called MinTTY. On a Mac, the operating system is the Mac OS, which is a descendant of BSD, which is a variant of the Unix operating system. Linux is also based on Unix. That's why your Mac has this Unix-like environment inside it that's ready to go; because there actually _is_ Unix inside it. On a Windows, Cygwin programs are actually speaking to the Windows operating system, so even though they do a good job of looking and acting like Unix, it's not a perfect imitation.
+So in an abstract sense the one on your screen is emulating the behavior of that device. The terminal on a Mac is just called Terminal. In Cygwin, the default terminal is called MinTTY. On a Mac, the operating system is the Mac OS, which is a descendant of BSD, which is a variant of the Unix operating system. Linux is also based on Unix. That's why your Mac has this Unix-like environment inside it that's ready to go; because there actually _is_ Unix inside it. On a Windows, Cygwin programs are actually speaking to the Windows operating system, so even though they do a good job of looking and acting like Unix, it's not a perfect imitation.
 
 The default shell on Macs, in Cygwin, and on a lot of Linux machines is called Bash. The shell is just a program that turns commands into actions, but it is also an interpreted scripting language with its own syntax. Different shells have different syntax, which is why using the built-in Windows shell, called CMD.EXE, can be a different experience from using Bash even when the programs are the same. That's not to mention that different operating systems have different programs available. On Unix systems, the other shell you might run into is the Z Shell, or "zsh," which has some additional nice features, but you'll rarely be forced to use it unless you want to.
 
@@ -136,9 +136,9 @@ man bash
 /commands for moving
 ```
 
-to jump to the appropriate heading.
+to jump to the appropriate heading. You can quickly search man pages with `apropos`, which searches the help database for partial strings and prints the names of matching man pages, and `whatis`, which does the same thing except it only matches full words.
 
-There are two different styles of keyboard commands being used here, originally created by two popular command-line text editors, Emacs and Vi. Bash uses Emacs-style commands, and `less` uses Vi-style commands.
+There are two different styles of keyboard commands being used here, originally created by two popular command-line text editors, Emacs and Vi. Bash itself, or more accurately the component of Bash called "Readline" that allows you to move around and edit your input before pressing Enter, uses Emacs-style commands, and `less` uses Vi-style commands.
 
 ## Managing files
 
