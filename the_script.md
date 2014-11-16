@@ -34,7 +34,7 @@ In Finder/Explorer, we can usually see what folder we're in by looking at the ti
 pwd
 ```
 
-which stands for "`p`rint `w`working `d`irectory." Try it now; all it does is print the working directory to the terminal output, called the "standard output" or stdout. By default, the shell opens in what's known as the home directory, which on a Mac is /Users/your-user-name. The "/" directory is the "base" directory. In Cygwin, the file structure is going to be a little bit different, because it sets up a "mini Unix" file structure inside a folder somewhere in your computer and "pretends" there's nothing outside it, but in Windows the "/" is equivalent to "C:".
+which stands for "`p`rint `w`working `d`irectory." Try it now; all it does is print the working directory to the terminal output, called the "standard output" or stdout. By default, the shell opens in what's known as the home directory, which on a Mac is /Users/your-user-name. The "/" directory is the "base" directory, equivalent to "C:" in Windows. In Cygwin, the file structure is going to be a little bit different, because it sets up a "mini Unix" file structure inside a folder somewhere in your computer and "pretends" there's nothing outside it, so Cygwin's behavior is a little different.
 
 The default Mac prompt is made of a few components: the "host name," which is usually the name of your computer unless you're connected to a big network like the Columbia network, the working directory, your username, and a dollar sign to indicate where to type in commands. You'll see that the working directory here is `~` and not `/Users/hotdog2/`. The tilde is Unix shorthand for the home directory, whatever it might be. To see this, type
 
@@ -42,7 +42,7 @@ The default Mac prompt is made of a few components: the "host name," which is us
 echo ~
 ```
 
-Before it runs any command here, the shell first sees that there's a `~` and "expands" it to `/Users/hotdog2/`, and _then_ runs the command. That might not mean much right now, but it's a special kind of behavior and it will be important to understand once you start programming the shell, which you undoubtedly will at some point. The `echo` command just prints its argument to stdout, so all we did here was tell Bash to run the command `echo` on its "argument," which is programming-language jargon for "input to a function." In Bash, functions and arguments are separated by a space, and arguments are also separated from each other by a space. This makes it really easy to write commands without lots of punctuation, but it can also cause problems with, say, spaces in file names. You are allowed to have spaces in file names but you need to handle them the right way. We'll get to that a bit later. \< talk about Cygwin: http://stackoverflow.com/q/11089390/2954547 >.
+Before it runs any command here, the shell first sees that there's a `~` and "expands" it to `/Users/hotdog2/`, and _then_ runs the command. That might not mean much right now, but it's a special kind of behavior and it will be important to understand once you start programming the shell, which you undoubtedly will at some point. The `echo` command just prints its argument to stdout, so all we did here was tell Bash to run the command `echo` on its "argument," which is programming-language jargon for "input to a function." In Bash, functions and arguments are separated by a space, and arguments are also separated from each other by a space. This makes it really easy to write commands without lots of punctuation, but it can also cause problems with, say, spaces in file names. You are allowed to have spaces in file names but you need to handle them the right way. We'll get to that a bit later. This might not work in Cygwin; see: http://stackoverflow.com/q/11089390/2954547
 
 So you might have noticed that you feel a little bit "blind" working in the shell versus working in the GUI. For instance, in Finder I can not only see all of the contents of my working directory but I also have a lot of other information available at once. In the shell, you have to ask for that information; it doesn't tell you anything you don't ask it for. We can see the contents of the working directory with the command
 
@@ -50,7 +50,7 @@ So you might have noticed that you feel a little bit "blind" working in the shel
 ls
 ```
 
-which stands for "`l`i`s`t files." On my screen, folders are purple and regular files are white, but that's because I set those colors in a special file that I won't have time to discuss today; by default there isn't any color coding. On a Mac, like on my computer, there is going to be a lot of junk in here. \< talk about Cygwin >.
+which stands for "`l`i`s`t files." On my screen, folders are purple and regular files are white, but that's because I set those colors in a special file that I won't have time to discuss today; by default there isn't any color coding. On a Mac, like on my computer, there is going to be at least some junk in here. On Cygwin, it'll probably be empy.
 
 What's cool about `ls` is that it also takes arguments. That is, I can actually tell `ls` what folder to display without having to navigate to that folder (which I haven't told you how to do yet, anyway). Let's say we wanted to look at the contents of our system root directory, indicated by a plain `/` (this works differently from `~`; more on it later). Then we can type
 
@@ -252,6 +252,18 @@ You can also, of course, edit files with a regular text editor. You can do it in
 One last thing: Linux pioneered a brilliant "package manager" system. For instance, on Ubutnu and Debian, I can type, say, `apt-get R` to automatically download, build, and install R. A few third-party package mangers exist for Macs, but I'm only going to recommend one: Homebrew. Google it to learn more. It's open source, it's written in Ruby and based on Git, and it's fairly self-contained, in that it doesn't spew garbage all over your system and typically doesn't break other programs. It can be a bit difficult to uninstall (there is no official uninstall tool and the one uninstall script people link to is horrible and dangerous).
 
 On Cygwin, you don't have a command line package manager but it does have a package manager. Run the "setup.exe" file that you used to install Cygwin to access it. Cygwin comes with a very limited set of tools by default, but it has a good selection of available packages.
+
+### SSH
+
+You can connect to other computers easily through the command line, as long as they are "listening." For instance, Columbia has a Unix server and every student has an account on it, along with 600 MB of storage space. To connect, type
+
+```
+ssh gw2286@cunix.cc.columbia.edu
+# or the fun way:
+# uni=gw2286
+# ssh ${uni}@cunix.cc.columbia.edu
+```
+and enter your password when prompted (you won't be able to see it on screen). You honestly can't do much on here, but if you want to host anything at [www.columbia.edu/~gw2286] (yes, Columbia also gives you a personal website) you need to save it here, in the "public_html" folder. You need to use a different program (either SCP or SFTP) to move files back and forth. They're both pretty easy to use... read the manpage!
 
 ### One last thing:
 
