@@ -1,6 +1,6 @@
-# How to use the command line
+# QASR Workshop #1: How to use the command line
 ### November 18, 2014
-### by Greg Werbin, on behalf of QASR
+### Greg Werbin
 
 ## Intro
 
