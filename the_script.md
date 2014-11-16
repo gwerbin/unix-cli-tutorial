@@ -4,7 +4,9 @@
 
 ## Intro
 
-Today we're going to learn how to use the command line. The command line is a great tool for automating tasks, processing text streams, and just getting around your computer efficiently. I'm going to throw a lot of stuff at you today, but it really is worth taking the time to learn. It's an old school skill, but it's coming back in a big way. If nothing else, you will be more efficient and therefore productive once you're comfortable with it. But it's also becoming increasingly important as a component of basic computer literacy for anyone involved in statistics and other data-related work, because those fields are becoming increasingly dependent on computing and programming.
+Today we're going to learn how to use the command line. The command line is a great tool for automating tasks, processing text streams, and just getting around your computer efficiently. I'm going to throw a lot of stuff at you today, but it really is worth taking the time to learn. It's an old school skill, but it's coming back in a big way. If nothing else, you will be more efficient and therefore productive once you're comfortable with it.
+
+But it's also becoming increasingly important as a component of basic computer literacy for anyone involved in statistics and other data-related work, because those fields are becoming increasingly dependent on computing and programming. If nothing else, learning how to use the command line is worth it to solely to be able to use Git properly. The GitHub GUI clients are nightmarishly bad, and Git is complicated enough as it is. Git is still basically a command-line only tool, but it's an extremely useful one and anyone involved in any kind of collaboration needs to be aware of it.
 
 Hopefully you followed the instructions we sent out with the RSVP. If you're on a Mac there isn't much you had to do, but if you're on a Windows machine you will need to have Cygwin installed and ready to go in order to be able to do most what I'm going to show today.
 
@@ -263,7 +265,7 @@ ssh gw2286@cunix.cc.columbia.edu
 # uni=gw2286
 # ssh ${uni}@cunix.cc.columbia.edu
 ```
-and enter your password when prompted (you won't be able to see it on screen). You honestly can't do much on here, but if you want to host anything at [www.columbia.edu/~gw2286] (yes, Columbia also gives you a personal website) you need to save it here, in the "public_html" folder. You need to use a different program (either SCP or SFTP) to move files back and forth. They're both pretty easy to use... read the manpage!
+and enter your password when prompted (you won't be able to see it on screen). You honestly can't do much on here, although it's a good place to practice working in a more "hard core" Unix environment, such as you might actually face if you need to get data out of a server at some point in your life. You can also move outside your personal folder with `cd` (although you can't edit anything) and explore what a bigger filesystem might look like. And if you want to host anything at [www.columbia.edu/~gw2286] (yes, Columbia also gives you a personal website) you need to save it here, in the "public_html" folder. You need to use a different program (either SCP or SFTP) to move files back and forth, but they're both pretty easy to use... read the manpage!
 
 ### One last thing:
 
